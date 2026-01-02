@@ -90,6 +90,18 @@ if st.button("🔮 Predict Churn"):
         # Fokus pada CHURN
         st.write(f"⚠️ Peluang CHURN: {probability:.2%}")
 
+        # Pie Chart
+        import matplotlib.pyplot as plt
+
+        labels = ['Stay', 'Churn']
+        sizes = [1 - probability, probability]
+        colors = ['#66b3ff', '#ff6666']
+        explode = (0, 0.1)  # only "explode" the 2nd slice (i.e. 'Churn')
+
+        fig, ax = plt.subplots()
+        ax.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
+        ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+        st.pyplot(fig)
 
     except Exception as e:
         st.error(f"❌ Error: {e}")
